@@ -276,6 +276,11 @@ if st.sidebar.checkbox('Relación entre suicidios e innovación', False):
 #ANÁLISIS DE SUICIDIOS E INVERSION
 
 inversion = pd.read_csv('Inversion.csv', sep = ";", decimal=",") # leer datos
+inversion=inversion.convert_dtypes()
+columnas=inversion.columns[1:]
+for i in columnas:
+  inversion[i]=inversion[i].apply(lambda x: float(x.replace(',', '.').strip('%')) / 100.0)
+
 inversion=inversion.rename(columns = {'Ano':'Año'})
 inversion=inversion.drop(20, axis=0)
 inversion["Año"] = pd.to_datetime(inversion['Año'], format="%Y")
@@ -296,15 +301,10 @@ if st.sidebar.checkbox('Relación entre suicidios e inversión', False):
     ACTI['DepartamentoACTI']=ACTI['DepartamentoACTI'].apply(lambda x: x.replace("_ACTI", ""))
 
     ID['DepartamentoID']=ID['DepartamentoID'].apply(lambda x: x.replace("_I+D", ""))
-
-    ACTI.head()
-    ID.head()
     
     ID.columns=["Año","Departamento", "ID"]
     ACTI.columns=["Año", "Departamento", "ACTI"]
     
-    ACTI.head()
-    ID.head()
 
     ID=ID[ID["Departamento"] != "COLOMBIA"]
     ACTI=ACTI[ACTI["Departamento"] != "COLOMBIA"]
@@ -323,8 +323,7 @@ if st.sidebar.checkbox('Relación entre suicidios e inversión', False):
     ID.loc[ID["Departamento"]=='narino',"Departamento"] = "nariño"
     
     st.write(ACTI.head())
-    st.write(ACTI.head().dtypes)
-    ID.head()
+    st.write(ID.head())
     
     #Suicidios-Inversión
     #BD3=pd.concat([TablaAgregada,ACTI],  join= 'outer', axis = 1)
