@@ -64,7 +64,7 @@ if not st.sidebar.checkbox("Ocultar página principal", False, key='1'):
     # Título principal, h1 denota el estilo del título 1
     
     st.markdown("<h1 style='text-align: center; color: #3C9AD0;' > ANÁLISIS DESCRIPTIVO DE LOS SUICIDIOS Y SU RELACIÓN CON FACTORES EXTERNOS </h1>", unsafe_allow_html=True)
-    st.markdown("<h2 style='text-align: left; color: #73C6B6;' > Objetivo: </h1>", unsafe_allow_html=True)
+    st.markdown("<h2 style='text-align: left; color: #73C6B6;' > Objetivo: Caracterizar los suicidios en Colombia y su relación con factores externos y tecnológicos</h1>", unsafe_allow_html=True)
     st.sidebar.title ("ANÁLISIS DESCRIPTIVO DE LOS SUICIDIOS Y SU RELACIÓN CON FACTORES EXTERNOS")
     st.sidebar.markdown ("Navegador")
     
