@@ -190,12 +190,12 @@ if not st.sidebar.checkbox("Ocultar página principal", False, key='1'):
     # Capa con información
     layers = [pdk.Layer(
         'HexagonLayer',
-        data = suicidios[['Latitude (y)','Longitude (x)']],
+        data = suicidios,
         get_position = ['Longitude (x)','Latitude (y)'],
         radius = 100,
         extruded = True,
         elevation_scale = 4,
-        elevation_range = [0,1000])]
+        elevation_range = [0,5000])]
     )
     
 
