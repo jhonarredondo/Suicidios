@@ -173,6 +173,8 @@ if not st.sidebar.checkbox("Ocultar página principal", False, key='1'):
 
     #Departamento1 = st.write('Depto en el que se presento el suceso', suicidios['Departamento'].min(), suicidios['Departamento'].max()) # Crear variable que me almacene el año seleccionado
     #st.map(suicidios[suicidios['Departamento']==Departamento1][['Departamento']].dropna()) # Generar mapa
+    suicidios['Latitude (y)']=suicidios['Latitude (y)'].apply(lambda x: float(x.replace(',', '.')))
+    suicidios['Longitude (x)']=suicidios['Longitude (x)'].apply(lambda x: float(x.replace(',', '.')))
     
     pdk.Deck( # Código para crear el mapa
     
