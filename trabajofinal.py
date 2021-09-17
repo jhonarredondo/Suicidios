@@ -164,13 +164,6 @@ if not st.sidebar.checkbox("Ocultar página principal", False, key='1'):
             pickable=True,
             extruded=True,
          ),
-         pdk.Layer(
-             'ScatterplotLayer',
-             data=df,
-             get_position='[lon, lat]',
-             get_color='[200, 30, 0, 160]',
-             get_radius=20000,
-         ),
      ],
  ))
     
