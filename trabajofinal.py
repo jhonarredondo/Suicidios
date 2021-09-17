@@ -143,36 +143,7 @@ if not st.sidebar.checkbox("Ocultar página principal", False, key='1'):
     
     
     st.markdown("<h2 style='text-align: left; color: #F7DC6F ;' > Departamento </h1>", unsafe_allow_html=True)
-    
-    
-    #depto = st.write('Departamento en la que se presento el suceso', suicidios['Departamento'].min(), suicidios['Departamento'].max()) # Crear variable que me almacene el departamento seleccionada
-    #df2 = suicidios[suicidios['Departamento']==depto] # Filtrar DataFrame
 
-    #st.markdown(pdk.Deck( # Código para crear el mapa
-    
-    #Set up del mapa
-    #map_style='mapbox://styles/mapbox/light-v9',
-    #initial_view_state={
-     #   'Latitude (y)' : suicidios['Latitude (y)'].mean(),
-      #  'Longitude (x)': suicidios['Longitude (x)'].mean(),
-       # 'zoom' : 9.5,
-        #'pitch': 50
-        #},
-    
-    # Capa con información
-    #layers = [pdk.Layer(
-     #   'HexagonLayer',
-      #  data = df2[['Departamento','Latitude (y)','Longitude (x)']],
-      #  get_position = ['Longitude (x)','Latitude (y)'],
-      #  radius = 100,
-       # extruded = True,
-       # elevation_scale = 4,
-        #elevation_range = [0,1000])]
-    #))
-    
-
-    #Departamento1 = st.write('Depto en el que se presento el suceso', suicidios['Departamento'].min(), suicidios['Departamento'].max()) # Crear variable que me almacene el año seleccionado
-    #st.map(suicidios[suicidios['Departamento']==Departamento1][['Departamento']].dropna()) # Generar mapa
     suicidios['Latitude (y)']=suicidios['Latitude (y)'].apply(lambda x: float(x.replace(',', '.')))
     suicidios['Longitude (x)']=suicidios['Longitude (x)'].apply(lambda x: float(x.replace(',', '.')))
     
@@ -184,7 +155,7 @@ if not st.sidebar.checkbox("Ocultar página principal", False, key='1'):
      initial_view_state=pdk.ViewState(
          latitude=5,
          longitude=-75,
-         zoom=11,
+         zoom=5,
          pitch=50,
      ),
      layers=[
@@ -192,9 +163,9 @@ if not st.sidebar.checkbox("Ocultar página principal", False, key='1'):
             'HexagonLayer',
             data=df,
             get_position='[lon, lat]',
-            radius=2000,
-            elevation_scale=4,
-            elevation_range=[0, 1000],
+            radius=20000,
+            elevation_scale=5,
+            elevation_range=[0, 10000],
             pickable=True,
             extruded=True,
          ),
@@ -203,38 +174,10 @@ if not st.sidebar.checkbox("Ocultar página principal", False, key='1'):
              data=df,
              get_position='[lon, lat]',
              get_color='[200, 30, 0, 160]',
-             get_radius=2000,
+             get_radius=20000,
          ),
      ],
  ))
-    
-    
-    
-    
-    
-
-    
-    st.pydeck_chart(pdk.Deck( # Código para crear el mapa
-    
-    # Set up del mapa
-    map_style='mapbox://styles/mapbox/light-v9',
-    initial_view_state={
-        'latitude' : suicidios['Latitude (y)'].mean(),
-        'longitude': suicidios['Longitude (x)'].mean(),
-        'zoom' : 9.5,
-        'pitch': 50
-        },
-    
-    # Capa con información
-    layers = [pdk.Layer(
-        'HexagonLayer',
-        data = suicidios,
-        get_position = ['Longitude (x)','Latitude (y)'],
-        radius = 100,
-        extruded = True,
-        elevation_scale = 4,
-        elevation_range = [0,5000])]
-    ))
     
 
 
