@@ -38,8 +38,8 @@ if not st.sidebar.checkbox("Ocultar página principal", False, key='1'):
     #st.write(suicidios)
     
     
-    suicidios=suicidios.drop("ID", axis=1)
-    suicidios.columns = ["Año", "Sexo", "Edad", "Mes", "DiaSemana", "Departamento", "Municipio", "Causa", "Estado", "Latitude (y)", "Longitude (x)"]
+    #suicidios=suicidios.drop("ID", axis=1)
+    suicidios.columns = ["ID", "Año", "Sexo", "Edad", "Mes", "DiaSemana", "Departamento", "Municipio", "Causa", "Estado", "Latitude (y)", "Longitude (x)"]
     suicidios['Año'].value_counts() #2016 a 2018
     suicidios['Sexo'].value_counts() #Mayoria Hombres
     suicidios['Edad'].value_counts() #Mayoria de 20 a 29 años
@@ -190,7 +190,7 @@ if not st.sidebar.checkbox("Ocultar página principal", False, key='1'):
     # Capa con información
     layers = [pdk.Layer(
         'HexagonLayer',
-        data = suicidios[['Departamento','Latitude (y)','Longitude (x)']],
+        data = suicidios[['ID','Latitude (y)','Longitude (x)']],
         get_position = ['Longitude (x)','Latitude (y)'],
         radius = 100,
         extruded = True,
