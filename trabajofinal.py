@@ -179,7 +179,7 @@ if not st.sidebar.checkbox("Ocultar página principal", False, key='1'):
     st.pydeck_chart(pdk.Deck( # Código para crear el mapa
     
     # Set up del mapa
-    #map_style='mapbox://styles/mapbox/light-v9',
+    map_style='mapbox://styles/mapbox/light-v9',
     initial_view_state={
         'latitude' : suicidios['Latitude (y)'].mean(),
         'longitude': suicidios['Longitude (x)'].mean(),
