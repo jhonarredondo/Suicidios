@@ -156,7 +156,7 @@ if not st.sidebar.checkbox("Ocultar página principal", False, key='1'):
          latitude=5,
          longitude=-75,
          zoom=5,
-         pitch=500,
+         pitch=50,
      ),
      layers=[
          pdk.Layer(
@@ -165,7 +165,7 @@ if not st.sidebar.checkbox("Ocultar página principal", False, key='1'):
             get_position='[lon, lat]',
             radius=20000,
             elevation_scale=5,
-            elevation_range=[0, 50000],
+            elevation_range=[0, 55000],
             pickable=True,
             extruded=True,
          ),
@@ -327,9 +327,6 @@ if st.sidebar.checkbox('Relación entre suicidios e inversión', False):
 
     ACTI.loc[ACTI["Departamento"]=='narino',"Departamento"] = "nariño"
     ID.loc[ID["Departamento"]=='narino',"Departamento"] = "nariño"
-    
-    st.write(ACTI.head())
-    st.write(ID.head())
     
     #Suicidios-Inversión
     #BD3=pd.concat([TablaAgregada,ACTI],  join= 'outer', axis = 1)
