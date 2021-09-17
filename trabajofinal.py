@@ -176,7 +176,7 @@ if not st.sidebar.checkbox("Ocultar página principal", False, key='1'):
     suicidios['Latitude (y)']=suicidios['Latitude (y)'].apply(lambda x: float(x.replace(',', '.')))
     suicidios['Longitude (x)']=suicidios['Longitude (x)'].apply(lambda x: float(x.replace(',', '.')))
     
-    pdk.Deck( # Código para crear el mapa
+    st.markdown(pdk.Deck( # Código para crear el mapa
     
     # Set up del mapa
     #map_style='mapbox://styles/mapbox/light-v9',
@@ -196,7 +196,7 @@ if not st.sidebar.checkbox("Ocultar página principal", False, key='1'):
         extruded = True,
         elevation_scale = 4,
         elevation_range = [0,5000])]
-    )
+    ))
     
     UK_ACCIDENTS_DATA = 'https://raw.githubusercontent.com/visgl/deck.gl-data/master/examples/3d-heatmap/heatmap-data.csv'
 
@@ -220,6 +220,8 @@ if not st.sidebar.checkbox("Ocultar página principal", False, key='1'):
         max_zoom=15,
         pitch=40.5,
         bearing=-27.36)
+    
+    pdk.Deck(layers=[layer], initial_view_state=view_state)
 
 ###############################################################################################################
 
