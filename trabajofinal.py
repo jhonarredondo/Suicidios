@@ -179,7 +179,7 @@ if not st.sidebar.checkbox("Ocultar página principal", False, key='1'):
     pdk.Deck( # Código para crear el mapa
     
     # Set up del mapa
-    map_style='mapbox://styles/mapbox/light-v9',
+    #map_style='mapbox://styles/mapbox/light-v9',
     initial_view_state={
         'latitude' : suicidios['Latitude (y)'].mean(),
         'longitude': suicidios['Longitude (x)'].mean(),
@@ -191,7 +191,7 @@ if not st.sidebar.checkbox("Ocultar página principal", False, key='1'):
     layers = [pdk.Layer(
         'HexagonLayer',
         data = suicidios[['Departamento','Latitude (y)','Longitude (x)']],
-        get_position = ['longitude','latitude'],
+        get_position = ['Longitude (x)','Latitude (y)'],
         radius = 100,
         extruded = True,
         elevation_scale = 4,
