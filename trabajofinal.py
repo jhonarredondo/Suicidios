@@ -173,49 +173,38 @@ if not st.sidebar.checkbox("Ocultar página principal", False, key='1'):
 
     #Departamento1 = st.write('Depto en el que se presento el suceso', suicidios['Departamento'].min(), suicidios['Departamento'].max()) # Crear variable que me almacene el año seleccionado
     #st.map(suicidios[suicidios['Departamento']==Departamento1][['Departamento']].dropna()) # Generar mapa
-    st.pydeck_chart(
-    pdk.Deck(
-        map_style="mapbox://styles/mapbox/light-v9",
-        initial_view_state=pdk.ViewState(
-            latitude=addresses_df["lat"][0],
-            longitude=addresses_df["lon"][0],
-            zoom=20,
-            pitch=50,
-        ),
-        layers=[
-            pdk.Layer(
-                "ScatterplotLayer",
-                data=flow_df,
-                get_position="[lon, lat]",
-                get_radius=5,
-                pickable=True,
-                opacity=0.8,
-                stroked=False,
-                filled=True,
-                wireframe=True,
-            ),
-            pdk.Layer(
-                "HexagonLayer",
-                data=data,
-                get_position="[lon, lat]",
-                radius=2.5,
-                elevation_scale=0.1,
-                pickable=True,
-                extruded=True,
-                auto_highlight=True,
-                coverage=0.9,
-            ),
-        ],
-        tooltip={
-            "html": "<b>adresse:</b> {address}"
-            "<br/> <b>mape:</b> {pourc_err}"
-            " <br/> <b>count:</b> {flow_value_count} "
-            "<br/> <b>prediction:</b> {flow_value_streaming}"
-            "<br/> <b>pedestrian ids:</b> {elevationValue}",
-            "style": {"color": "white"},
-        },
-    )
-    )
+    df = pd.DataFrame(
+    np.random.randn(1000, 2) / [50, 50] + [37.76, -122.4],
+    columns=['lat', 'lon'])
+
+    st.pydeck_chart(pdk.Deck(
+     map_style='mapbox://styles/mapbox/light-v9',
+     initial_view_state=pdk.ViewState(
+         latitude=37.76,
+         longitude=-122.4,
+         zoom=11,
+         pitch=50,
+     ),
+     layers=[
+         pdk.Layer(
+            'HexagonLayer',
+            data=df,
+            get_position='[lon, lat]',
+            radius=200,
+            elevation_scale=4,
+            elevation_range=[0, 1000],
+            pickable=True,
+            extruded=True,
+         ),
+         pdk.Layer(
+             'ScatterplotLayer',
+             data=df,
+             get_position='[lon, lat]',
+             get_color='[200, 30, 0, 160]',
+             get_radius=200,
+         ),
+     ],
+ ))
     
     
     
