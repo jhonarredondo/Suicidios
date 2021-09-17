@@ -322,7 +322,8 @@ if st.sidebar.checkbox('Relación entre suicidios e inversión', False):
     ACTI.loc[ACTI["Departamento"]=='narino',"Departamento"] = "nariño"
     ID.loc[ID["Departamento"]=='narino',"Departamento"] = "nariño"
     
-    ACTI.head()
+    st.write(ACTI.head())
+    st.write(ACTI.head().dtypes)
     ID.head()
     
     #Suicidios-Inversión
