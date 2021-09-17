@@ -176,8 +176,8 @@ if not st.sidebar.checkbox("Ocultar página principal", False, key='1'):
     suicidios['Latitude (y)']=suicidios['Latitude (y)'].apply(lambda x: float(x.replace(',', '.')))
     suicidios['Longitude (x)']=suicidios['Longitude (x)'].apply(lambda x: float(x.replace(',', '.')))
     
-    suicidios=suicidios[["Longitude (x)", "Latitude (y)"]]
-    suicidios.columns=["lon", "lat"]
+    df=suicidios[["Longitude (x)", "Latitude (y)"]]
+    df.columns=["lon", "lat"]
 
     st.pydeck_chart(pdk.Deck(
      map_style='mapbox://styles/mapbox/light-v9',
