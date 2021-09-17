@@ -6,5 +6,5 @@ datetime
 openpyxl
 Pydeck
 seaborn
-
+sklearn
 
