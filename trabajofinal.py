@@ -53,10 +53,10 @@ def sintilde(cadena):
     return cadena
     
 #San Andrés
-suicidios.loc[suicidios["Departamento"]=='archipiélago de san andrés, providencia y santa catalina',"Departamento"] = "san andrés"
+suicidios.loc[suicidios["Departamento"]=='archipiélago de san andrés, providencia y santa catalina',"Departamento"] = "san andres"
     
 #bogotá d.c.
-suicidios.loc[suicidios["Departamento"]=='bogotá, d.c.',"Departamento"] = "bogotá d.c."
+suicidios.loc[suicidios["Departamento"]=='bogotá, d.c.',"Departamento"] = "bogota d.c."
     
 suicidios["Departamento"]=suicidios["Departamento"].apply(lambda x: sintilde(x))
 
@@ -318,13 +318,13 @@ if st.sidebar.checkbox('Relación entre suicidios e inversión', False):
 
     ACTI.loc[ACTI["Departamento"]=='narino',"Departamento"] = "nariño"
     ID.loc[ID["Departamento"]=='narino',"Departamento"] = "nariño"
+   
     
     #Suicidios-Inversión
-    #BD3=pd.concat([TablaAgregada,ACTI],  join= 'outer', axis = 1)
-    #BD3=pd.merge(TablaAgregada,ACTI, left_on=['Año', "Departamento"], right_on=['Ano', "Departamento"], how = 'inner') # dejando solos los años y departamentos en común
-    #BD3=pd.merge(BD3,ID, left_on=['Año', "Departamento"], right_on=['Ano', "Departamento"], how = 'inner') # dejando solos los años y departamentos en común
     BD3=pd.merge(TablaAgregada,ACTI, on=['Año', "Departamento"], how = 'inner') # dejando solos los años y departamentos en común
     BD3=pd.merge(BD3,ID, on=['Año', "Departamento"], how = 'inner')
+    
+    st.write(BD3.head())
     
     #HEATMAP
     fig, ax = plt.subplots();
