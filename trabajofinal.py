@@ -325,7 +325,7 @@ if st.sidebar.checkbox('Relación entre suicidios e inversión', False):
     BD3=pd.merge(BD3,ID, on=['Año', "Departamento"], how = 'inner')
     
     st.write(BD3["Departamento"].unique())
-    st.write(suicidios["Departamento"].unique())
+    st.write(TablaAgregada["Departamento"].unique())
     st.write(ACTI["Departamento"].unique())
 
     
