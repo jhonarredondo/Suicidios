@@ -324,9 +324,10 @@ if st.sidebar.checkbox('Relación entre suicidios e inversión', False):
     BD3=pd.merge(TablaAgregada,ACTI, on=['Año', "Departamento"], how = 'inner') # dejando solos los años y departamentos en común
     BD3=pd.merge(BD3,ID, on=['Año', "Departamento"], how = 'inner')
     
-    st.write(BD3.head(15))
-    st.write(suicidios.head(15))
-    st.write(ACTI.head(15))
+    st.write(BD3["Departamento"].unique())
+    st.write(suicidios["Departamento"].unique())
+    st.write(ACTI["Departamento"].unique())
+
     
     #HEATMAP
     fig, ax = plt.subplots();
