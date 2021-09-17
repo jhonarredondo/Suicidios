@@ -21,26 +21,24 @@ from sklearn.preprocessing import StandardScaler
 
 st.set_page_config(layout="wide")# Utilizar la página completa en lugar de una columna central estrecha
 
-    suicidios = pd.read_csv('Suicidios (1).csv', encoding='utf-8', sep = ";") # leer datos
-    #
-    #st.write(suicidios)
+suicidios = pd.read_csv('Suicidios (1).csv', encoding='utf-8', sep = ";") # leer datos
     
-    suicidios=suicidios.drop("ID", axis=1)
-    suicidios.columns = ["Año", "Sexo", "Edad", "Mes", "DiaSemana", "Departamento", "Municipio", "Causa", "Estado", "Latitude (y)", "Longitude (x)"]
-    suicidios['Año'].value_counts() #2016 a 2018
-    suicidios['Sexo'].value_counts() #Mayoria Hombres
-    suicidios['Edad'].value_counts() #Mayoria de 20 a 29 años
-    suicidios['Mes'].value_counts() #
-    suicidios['DiaSemana'].value_counts() #Mayoria Domingo
-    suicidios['Departamento'].value_counts() #Mayoria Antioquia
-    suicidios['Municipio'].value_counts() #Mayoria Bogota
-    suicidios['Causa'].value_counts() #Todos son suicidios... Eliminar variable
-    suicidios['Estado'].value_counts() #Todos son casos definitivos-confirmados... Eliminar variable
-    suicidios=suicidios.drop(["Causa", "Estado"], axis=1)
-    suicidios['Municipio']=suicidios['Municipio'].apply(lambda x: x.lower())
-    suicidios['Departamento']=suicidios['Departamento'].apply(lambda x: x.lower())
-    suicidios["Departamento"].value_counts() #Borrar el que es sin Inf
-    suicidios=suicidios[suicidios['Departamento'] != "sin información"].reset_index() # sin inf borrado
+suicidios=suicidios.drop("ID", axis=1)
+suicidios.columns = ["Año", "Sexo", "Edad", "Mes", "DiaSemana", "Departamento", "Municipio", "Causa", "Estado", "Latitude (y)", "Longitude (x)"]
+suicidios['Año'].value_counts() #2016 a 2018
+suicidios['Sexo'].value_counts() #Mayoria Hombres
+suicidios['Edad'].value_counts() #Mayoria de 20 a 29 años
+suicidios['Mes'].value_counts() #
+suicidios['DiaSemana'].value_counts() #Mayoria Domingo
+suicidios['Departamento'].value_counts() #Mayoria Antioquia
+suicidios['Municipio'].value_counts() #Mayoria Bogota
+suicidios['Causa'].value_counts() #Todos son suicidios... Eliminar variable
+suicidios['Estado'].value_counts() #Todos son casos definitivos-confirmados... Eliminar variable
+suicidios=suicidios.drop(["Causa", "Estado"], axis=1)
+suicidios['Municipio']=suicidios['Municipio'].apply(lambda x: x.lower())
+suicidios['Departamento']=suicidios['Departamento'].apply(lambda x: x.lower())
+suicidios["Departamento"].value_counts() #Borrar el que es sin Inf
+suicidios=suicidios[suicidios['Departamento'] != "sin información"].reset_index() # sin inf borrado
     
     
     
