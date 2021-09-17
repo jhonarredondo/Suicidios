@@ -297,9 +297,14 @@ if st.sidebar.checkbox('Relación entre suicidios e inversión', False):
 
     ID['DepartamentoID']=ID['DepartamentoID'].apply(lambda x: x.replace("_I+D", ""))
 
-
+    ACTI.head()
+    ID.head()
+    
     ID.columns=["Año","Departamento", "ID"]
     ACTI.columns=["Año", "Departamento", "ACTI"]
+    
+    ACTI.head()
+    ID.head()
 
     ID=ID[ID["Departamento"] != "COLOMBIA"]
     ACTI=ACTI[ACTI["Departamento"] != "COLOMBIA"]
@@ -316,6 +321,9 @@ if st.sidebar.checkbox('Relación entre suicidios e inversión', False):
 
     ACTI.loc[ACTI["Departamento"]=='narino',"Departamento"] = "nariño"
     ID.loc[ID["Departamento"]=='narino',"Departamento"] = "nariño"
+    
+    ACTI.head()
+    ID.head()
     
     #Suicidios-Inversión
     #BD3=pd.concat([TablaAgregada,ACTI],  join= 'outer', axis = 1)
