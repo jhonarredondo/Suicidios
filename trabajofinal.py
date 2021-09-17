@@ -192,7 +192,7 @@ if not st.sidebar.checkbox("Ocultar página principal", False, key='1'):
             'HexagonLayer',
             data=df,
             get_position='[lon, lat]',
-            radius=200,
+            radius=2000,
             elevation_scale=4,
             elevation_range=[0, 1000],
             pickable=True,
@@ -203,7 +203,7 @@ if not st.sidebar.checkbox("Ocultar página principal", False, key='1'):
              data=df,
              get_position='[lon, lat]',
              get_color='[200, 30, 0, 160]',
-             get_radius=200,
+             get_radius=2000,
          ),
      ],
  ))
