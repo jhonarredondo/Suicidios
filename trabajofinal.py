@@ -201,7 +201,7 @@ if st.sidebar.checkbox('Relación entre suicidios e internet', False):
 
     # crear gráfica
     fig = px.bar(base, x = 'Departamento', y='Indice', color="Año",
-            title= '<b> INDICE DE INTERNT POR DEPARTAMENTO<b>',
+            title= '<b> INDICE DE INTERNET POR DEPARTAMENTO<b>',
             color_discrete_sequence=px.colors.qualitative.Vivid)
 
     # agregar detalles a la gráfica
