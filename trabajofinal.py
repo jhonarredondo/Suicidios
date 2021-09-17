@@ -174,8 +174,6 @@ if not st.sidebar.checkbox("Ocultar página principal", False, key='1'):
     #Departamento1 = st.write('Depto en el que se presento el suceso', suicidios['Departamento'].min(), suicidios['Departamento'].max()) # Crear variable que me almacene el año seleccionado
     #st.map(suicidios[suicidios['Departamento']==Departamento1][['Departamento']].dropna()) # Generar mapa
     
-    df2 = suicidios[suicidios['Departamento']==depto] # Filtrar DataFrame
-    
     pdk.Deck( # Código para crear el mapa
     
     # Set up del mapa
