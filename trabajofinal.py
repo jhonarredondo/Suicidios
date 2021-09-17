@@ -173,7 +173,31 @@ if not st.sidebar.checkbox("Ocultar página principal", False, key='1'):
 
     #Departamento1 = st.write('Depto en el que se presento el suceso', suicidios['Departamento'].min(), suicidios['Departamento'].max()) # Crear variable que me almacene el año seleccionado
     #st.map(suicidios[suicidios['Departamento']==Departamento1][['Departamento']].dropna()) # Generar mapa
-
+    
+    df2 = suicidios[suicidios['Departamento']==depto] # Filtrar DataFrame
+    
+    pdk.Deck( # Código para crear el mapa
+    
+    # Set up del mapa
+    map_style='mapbox://styles/mapbox/light-v9',
+    initial_view_state={
+        'latitude' : suicidios['Latitude (y)'].mean(),
+        'longitude': suicidios['Longitude (x)'].mean(),
+        'zoom' : 9.5,
+        'pitch': 50
+        },
+    
+    # Capa con información
+    layers = [pdk.Layer(
+        'HexagonLayer',
+        data = suicidios[['Departamento','Latitude (y)','Longitude (x)']],
+        get_position = ['longitude','latitude'],
+        radius = 100,
+        extruded = True,
+        elevation_scale = 4,
+        elevation_range = [0,1000])]
+    )
+    
 
 ###############################################################################################################
 
