@@ -51,9 +51,10 @@ def sintilde(cadena):
     for a, b in replacements:
         cadena = cadena.replace(a, b)
     return cadena
-    
+
+st.write(suicidios["Departamento"].unique())
 #San Andrés
-suicidios.loc[suicidios["Departamento"]=='archipiélago de san andrés, providencia y santa catalina',"Departamento"] = "san andres"
+suicidios.loc[suicidios["Departamento"]=='archipiélago de san andrés',"Departamento"] = "san andres"
     
 #bogotá d.c.
 suicidios.loc[suicidios["Departamento"]=='bogotá, d.c.',"Departamento"] = "bogota d.c."
@@ -247,6 +248,7 @@ if st.sidebar.checkbox('Relación entre suicidios e innovación', False):
     
     innovacion["Departamento"]=innovacion["Departamento"].apply(lambda x: sintilde(x))
     
+    
     TablaAgregada=suicidios.groupby(["Año","Departamento"])[["Municipio"]].count().reset_index()
     TablaAgregada.columns=['Año','Departamento', 'Suicidios']
     
@@ -290,6 +292,11 @@ if st.sidebar.checkbox('Relación entre suicidios e inversión', False):
     
     TablaAgregada=suicidios.groupby(["Año","Departamento"])[["Municipio"]].count().reset_index()
     TablaAgregada.columns=['Año','Departamento', 'Suicidios']
+    #San Andrés
+    TablaAgregada.loc[TablaAgregada["Departamento"]=='archipiélago de san andres',"Departamento"] = "san andres"
+
+    #bogotá d.c.
+    TablaAgregada.loc[TablaAgregada["Departamento"]=='bogota',"Departamento"] = "bogota d.c."
     
     ACTI=pd.melt(inversion, id_vars =['Año'], value_vars =inversion.loc[:,inversion.columns.str.contains("ACTI")].columns)
     ACTI.columns=["Año", "DepartamentoACTI", "ACTI"]
