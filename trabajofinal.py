@@ -40,27 +40,25 @@ suicidios['Departamento']=suicidios['Departamento'].apply(lambda x: x.lower())
 suicidios["Departamento"].value_counts() #Borrar el que es sin Inf
 suicidios=suicidios[suicidios['Departamento'] != "sin información"].reset_index() # sin inf borrado
     
+def sintilde(cadena):
+    replacements = (
+    ("á", "a"),
+    ("é", "e"),
+    ("í", "i"),
+    ("ó", "o"),
+    ("ú", "u")
+    )
+    for a, b in replacements:
+        cadena = cadena.replace(a, b)
+    return cadena
     
+#San Andrés
+suicidios.loc[suicidios["Departamento"]=='archipiélago de san andrés, providencia y santa catalina',"Departamento"] = "san andrés"
     
-    def sintilde(cadena):
-        replacements = (
-            ("á", "a"),
-            ("é", "e"),
-            ("í", "i"),
-            ("ó", "o"),
-            ("ú", "u")
-        )
-        for a, b in replacements:
-            cadena = cadena.replace(a, b)
-        return cadena
+#bogotá d.c.
+suicidios.loc[suicidios["Departamento"]=='bogotá, d.c.',"Departamento"] = "bogotá d.c."
     
-    #San Andrés
-    suicidios.loc[suicidios["Departamento"]=='archipiélago de san andrés, providencia y santa catalina',"Departamento"] = "san andrés"
-    
-    #bogotá d.c.
-    suicidios.loc[suicidios["Departamento"]=='bogotá, d.c.',"Departamento"] = "bogotá d.c."
-    
-    suicidios["Departamento"]=suicidios["Departamento"].apply(lambda x: sintilde(x))
+suicidios["Departamento"]=suicidios["Departamento"].apply(lambda x: sintilde(x))
 
 if not st.sidebar.checkbox("Ocultar página principal", False, key='1'):
     # Título principal, h1 denota el estilo del título 1
@@ -225,10 +223,6 @@ if st.sidebar.checkbox('Relación entre suicidios e internet', False):
     sns.heatmap(BD1.corr(), ax=ax);
 
     st.pyplot(fig)
-
-
-
-    
 
 #ANÁLISIS DE SUICIDIOS E INNOVACIÓN
 
