@@ -21,25 +21,12 @@ from sklearn.preprocessing import StandardScaler
 
 st.set_page_config(layout="wide")# Utilizar la página completa en lugar de una columna central estrecha
 
-if not st.sidebar.checkbox("Ocultar página principal", False, key='1'):
-    # Título principal, h1 denota el estilo del título 1
-    
-    st.markdown("<h1 style='text-align: center; color: #3C9AD0;' > ANÁLISIS DESCRIPTIVO DE LOS SUICIDIOS Y SU RELACIÓN CON FACTORES EXTERNOS </h1>", unsafe_allow_html=True)
-    st.markdown("<h2 style='text-align: left; color: #73C6B6;' > Objetivo: </h1>", unsafe_allow_html=True)
-    st.sidebar.title ("ANÁLISIS DESCRIPTIVO DE LOS SUICIDIOS Y SU RELACIÓN CON FACTORES EXTERNOS")
-    st.sidebar.markdown ("Navegador")
-    
-    
-    # VISUALIZACIÓN SUICIDIOS
-    
-    
     suicidios = pd.read_csv('Suicidios (1).csv', encoding='utf-8', sep = ";") # leer datos
     #
     #st.write(suicidios)
     
-    
-    #suicidios=suicidios.drop("ID", axis=1)
-    suicidios.columns = ["ID", "Año", "Sexo", "Edad", "Mes", "DiaSemana", "Departamento", "Municipio", "Causa", "Estado", "Latitude (y)", "Longitude (x)"]
+    suicidios=suicidios.drop("ID", axis=1)
+    suicidios.columns = ["Año", "Sexo", "Edad", "Mes", "DiaSemana", "Departamento", "Municipio", "Causa", "Estado", "Latitude (y)", "Longitude (x)"]
     suicidios['Año'].value_counts() #2016 a 2018
     suicidios['Sexo'].value_counts() #Mayoria Hombres
     suicidios['Edad'].value_counts() #Mayoria de 20 a 29 años
@@ -76,6 +63,18 @@ if not st.sidebar.checkbox("Ocultar página principal", False, key='1'):
     suicidios.loc[suicidios["Departamento"]=='bogotá, d.c.',"Departamento"] = "bogotá d.c."
     
     suicidios["Departamento"]=suicidios["Departamento"].apply(lambda x: sintilde(x))
+
+if not st.sidebar.checkbox("Ocultar página principal", False, key='1'):
+    # Título principal, h1 denota el estilo del título 1
+    
+    st.markdown("<h1 style='text-align: center; color: #3C9AD0;' > ANÁLISIS DESCRIPTIVO DE LOS SUICIDIOS Y SU RELACIÓN CON FACTORES EXTERNOS </h1>", unsafe_allow_html=True)
+    st.markdown("<h2 style='text-align: left; color: #73C6B6;' > Objetivo: </h1>", unsafe_allow_html=True)
+    st.sidebar.title ("ANÁLISIS DESCRIPTIVO DE LOS SUICIDIOS Y SU RELACIÓN CON FACTORES EXTERNOS")
+    st.sidebar.markdown ("Navegador")
+    
+    
+    # VISUALIZACIÓN SUICIDIOS
+    
     
     st.markdown("<h2 style='text-align: left; color: #F7DC6F ;' > Rangos de edades </h1>", unsafe_allow_html=True)
     
@@ -193,7 +192,7 @@ internet['Departamento']=internet['Departamento'].apply(lambda x: x.lower())
 
 internet=internet[internet["Ano"] != 2017]
 internet['Ano'].unique() #Del 2018 al 2020
-
+internet.columns = ["Año", "Trimestre", "Departamento", "Municipio", "Accesos_Fijos", "Poblacion", "Indice"]
 
 
 # Hacer un checkbox
@@ -201,11 +200,11 @@ internet['Ano'].unique() #Del 2018 al 2020
 
 if st.sidebar.checkbox('Relación entre suicidios e internet', False):
     
-    base=internet.groupby(["Departamento", "Ano"])["Indice"].sum().reset_index()
-    base["Ano"]=base["Ano"].astype(str)
+    base=internet.groupby(["Departamento", "Año"])["Indice"].sum().reset_index()
+    base["Año"]=base["Año"].astype(str)
 
     # crear gráfica
-    fig = px.bar(base, x = 'Departamento', y='Indice', color="Ano",
+    fig = px.bar(base, x = 'Departamento', y='Indice', color="Año",
             title= '<b> INDICE DE INTERNT POR DEPARTAMENTO<b>',
             color_discrete_sequence=px.colors.qualitative.Vivid)
 
@@ -223,7 +222,7 @@ if st.sidebar.checkbox('Relación entre suicidios e internet', False):
     TablaAgregada.columns=['Año','Departamento', 'Suicidios']
 
     ##Suicidios-Internet
-    BD1=pd.merge(TablaAgregada,internet,left_on=['Año', "Departamento"], right_on=['Ano', "Departamento"], how = 'inner') # dejando solos los años y departamentos en común
+    BD1=pd.merge(TablaAgregada,internet, on=['Año', "Departamento"], how = 'inner') # dejando solos los años y departamentos en común
     fig, ax = plt.subplots();
     sns.heatmap(BD1.corr(), ax=ax);
 
