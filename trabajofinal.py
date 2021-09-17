@@ -276,7 +276,10 @@ if st.sidebar.checkbox('Relación entre suicidios e innovación', False):
 #ANÁLISIS DE SUICIDIOS E INVERSION
 
 inversion = pd.read_csv('Inversion.csv', sep = ";", decimal=",") # leer datos
-
+inversion=inversion.rename(columns = {'Ano':'Año'})
+inversion=inversion.drop(20, axis=0)
+inversion["Año"] = pd.to_datetime(inversion['Año'], format="%Y")
+inversion["Año"] = pd.DatetimeIndex(inversion['Año']).year
 
 # Hacer un checkbox
 
@@ -286,17 +289,17 @@ if st.sidebar.checkbox('Relación entre suicidios e inversión', False):
     TablaAgregada=suicidios.groupby(["Año","Departamento"])[["Municipio"]].count().reset_index()
     TablaAgregada.columns=['Año','Departamento', 'Suicidios']
     
-    ACTI=pd.melt(inversion, id_vars =['Ano'], value_vars =inversion.loc[:,inversion.columns.str.contains("ACTI")].columns)
-    ACTI.columns=["Ano", "DepartamentoACTI", "ACTI"]
-    ID=pd.melt(inversion, id_vars =['Ano'], value_vars =inversion.loc[:,inversion.columns.str.contains("_I+")].columns)
-    ID.columns=["Ano","DepartamentoID", "ID"]
+    ACTI=pd.melt(inversion, id_vars =['Año'], value_vars =inversion.loc[:,inversion.columns.str.contains("ACTI")].columns)
+    ACTI.columns=["Año", "DepartamentoACTI", "ACTI"]
+    ID=pd.melt(inversion, id_vars =['Año'], value_vars =inversion.loc[:,inversion.columns.str.contains("_I+")].columns)
+    ID.columns=["Año","DepartamentoID", "ID"]
     ACTI['DepartamentoACTI']=ACTI['DepartamentoACTI'].apply(lambda x: x.replace("_ACTI", ""))
 
     ID['DepartamentoID']=ID['DepartamentoID'].apply(lambda x: x.replace("_I+D", ""))
 
 
-    ID.columns=["Ano","Departamento", "ID"]
-    ACTI.columns=["Ano", "Departamento", "ACTI"]
+    ID.columns=["Año","Departamento", "ID"]
+    ACTI.columns=["Año", "Departamento", "ACTI"]
 
     ID=ID[ID["Departamento"] != "COLOMBIA"]
     ACTI=ACTI[ACTI["Departamento"] != "COLOMBIA"]
@@ -315,10 +318,11 @@ if st.sidebar.checkbox('Relación entre suicidios e inversión', False):
     ID.loc[ID["Departamento"]=='narino',"Departamento"] = "nariño"
     
     #Suicidios-Inversión
-    BD3=pd.concat([TablaAgregada,ACTI],  join= 'outer', axis = 1)
+    #BD3=pd.concat([TablaAgregada,ACTI],  join= 'outer', axis = 1)
     #BD3=pd.merge(TablaAgregada,ACTI, left_on=['Año', "Departamento"], right_on=['Ano', "Departamento"], how = 'inner') # dejando solos los años y departamentos en común
-    BD3=pd.merge(BD3,ID, left_on=['Año', "Departamento"], right_on=['Ano', "Departamento"], how = 'inner') # dejando solos los años y departamentos en común
-    
+    #BD3=pd.merge(BD3,ID, left_on=['Año', "Departamento"], right_on=['Ano', "Departamento"], how = 'inner') # dejando solos los años y departamentos en común
+    BD3=pd.merge(TablaAgregada,ACTI, on=['Año', "Departamento"], how = 'inner') # dejando solos los años y departamentos en común
+    BD3=pd.merge(BD3,ID, on=['Año', "Departamento"], how = 'inner')
     
     #HEATMAP
     fig, ax = plt.subplots();
